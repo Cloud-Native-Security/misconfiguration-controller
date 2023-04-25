@@ -107,8 +107,6 @@ Once the Kubernetes Operator is installed inside the Kubernetes cluster, it will
 
 ## Contributing
 
-At this stage, I do not accept any contributions to this project as this is created as part of my Bachelor Thesis.
-
 ### How it works
 This project aims to follow the Kubernetes [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/).
 
