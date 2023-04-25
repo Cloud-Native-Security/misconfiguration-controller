@@ -13,7 +13,7 @@ If we test intentionally, we already know
 This allows us to build a response pipeline in theory, which is then tested in practice.
 Resulting, we can then analyse whether the real response matches our expected response and
 - improve our security tooling and processes
-- remove unknows and guessing
+- remove unknowns and guessing
 
 ## Usage Guide
 To use the Operator, follow these steps.
@@ -75,8 +75,7 @@ metadata:
 The deployment will be changed by the operator once per day for as long as it is running inside the Kubernetes cluster and the deployment has the annotation.
 
 Otherwise, the reconcilation loop will run if either of the following is true:
-1. A new Operator CRD with misconfiguration is deployed to the Kubernetes cluster and the same namespace contains a deployment with the Operator annotation is set to "true".
-2. A new Deployment is applied to the cluster and the Operator annotation is set to "true".
+A new Operator CRD with misconfiguration is deployed to the Kubernetes cluster and the same namespace contains a deployment with the Operator annotation is set to "true".
 
 ### Uninstall CRDs
 To delete the CRDs from the cluster:
