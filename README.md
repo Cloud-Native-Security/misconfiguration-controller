@@ -2,16 +2,17 @@
 
 ## Description
 
-This controller introduces misconfiguration into Kubernetes deployments to test how well your security tooling and processes respond to misconfiguration.
+This controller introduces misconfiguration into Kubernetes Deployments to test how well your security tooling and processes respond to misconfiguration.
 
 **Philosophy**
 Usually, we are waiting around until misconfiguration are introduced into our environments by accident. By using this Misconfiguration Operator, we can intentionally test misconfiguration.
 If we test intentionally, we already know
 - what went wrong &
 - how to fix it
+- gain higher control of our security tooling by making processes observable
 
 This allows us to build a response pipeline in theory, which is then tested in practice.
-Resulting, we can then analyse whether the real response matches our expected response and
+Resulting, we can analyse whether the real response matches our expected response and
 - improve our security tooling and processes
 - remove unknowns and guessing
 
@@ -36,10 +37,11 @@ make deploy
 ```
 
 Note that this will use the controller image specified in the Makefile.
+(I know, I will improve it to now use the latest tag and give you better deployment resources)
 
 **Create a Custom Resource**
 
-The Custom Resources is required to define what changes the Operator should take on your deployments. The template looks as follows:
+The Custom Resources is required to define what changes the Operator should take on your deployments. The custom-resource.yaml looks as follows:
 ```
 apiVersion: api.core.anaisurl.com/v1alpha1
 kind: Configuration
@@ -72,10 +74,13 @@ metadata:
         anaisurl.com/misconfiguration: "true"
 ```
 
-The deployment will be changed by the operator once per day for as long as it is running inside the Kubernetes cluster and the deployment has the annotation.
+The Operator will run by default every 10 hours.
 
-Otherwise, the reconcilation loop will run if either of the following is true:
-A new Operator CRD with misconfiguration is deployed to the Kubernetes cluster and the same namespace contains a deployment with the Operator annotation is set to "true".
+Otherwise, the reconcilation loop will run if
+* A new Operator CRD with misconfiguration is deployed to the Kubernetes cluster
+and either of the following is true:
+* The cluster contains a Deployment with the Operator annotation is set to "true"
+* The Deployment to be changed is at least 5 minutes old and has the tag set to "false"
 
 ### Uninstall CRDs
 To delete the CRDs from the cluster:
