@@ -32,7 +32,7 @@ git clone https://github.com/AnaisUrlichs/security-controller
 2.  Deploy the controller to the cluster::
 
 ```sh
-make install
+make deploy
 ```
 
 Note that this will use the controller image specified in the Makefile.
